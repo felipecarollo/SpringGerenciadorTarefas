@@ -8,6 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 
@@ -16,17 +20,21 @@ import javax.persistence.Table;
 public class Tarefa {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "tar_id")
 	private Long id;
 	
 	@Column(name = "tar_titulo", length = 50, nullable = false)
+	@NotNull(message = "Título obrigatório :)")
+	@Length(max = 50, min = 3, message = "3 - 50 letrinhas")
 	private String titulo;
 	
 	@Column(name = "tar_descricao", length = 100, nullable = true)
+	@Length(max = 100, message = "máximo 100 letrinhas")
 	private String descricao;
 	
 	@Column(name = "tar_data_expiracao", nullable = false)
+	@DateTimeFormat(pattern = "yyy-MM-dd")
 	private Date dataExpiracao;
 	
 	@Column(name = "tar_concluida", nullable = false)
@@ -48,12 +56,12 @@ public class Tarefa {
 		this.titulo = titulo;
 	}
 
-	public String getDescircao() {
-		return descircao;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setDescircao(String descircao) {
-		this.descircao = descircao;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public Date getDataExpiracao() {
@@ -72,4 +80,7 @@ public class Tarefa {
 		this.concluida = concluida;
 	}
 
+
+	
+	
 }

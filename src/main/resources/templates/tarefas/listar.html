@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>Listagem</title>
+
+
+<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+	<div th:replace="fragmentos/fragmentos :: cabecalho"></div>
+	<div class="container">
+		<h3>Listagem de Tarefas</h3>
+		<a href="/tarefas/inserir" class="btn btn-success">Inserir nova tarefa</a>
+		<div th:each="tarefa: ${tarefas}" style="margin: 10px">
+			<div class="card bg-light mb-3">
+				<div class="card-header" th:text="${tarefa.titulo}"></div>
+				<div class="card-body">
+					<p class="card-text" th:text="${tarefa.descricao}"></p>
+					<p class="card-text"
+						th:text="${'data de expiração' + #dates.format(tarefa.dataExpiracao, 'dd/MM/yyyy')}"></p>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<script type="/webjars/jquery/3.4.1/jquery.min.js"></script>
+	<script type="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
